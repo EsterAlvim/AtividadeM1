@@ -1,0 +1,21 @@
+CREATE DATABASE Festas;
+Use Festas;
+CREATE TABLE halloween (
+   idpessoa INT AUTO_INCREMENT PRIMARY KEY,
+   nomepessoa VARCHAR(255),
+   idadepessoa INT,
+   fantasia VARCHAR(255)
+);
+
+DELIMITER $$
+CREATE PROCEDURE InsereHalloweenAleatorios()
+BEGIN
+   DECLARE i INT DEFAULT 0;
+   WHILE i < 10000 DO
+       SET @nomepessoa := CONCAT('Pessoa', i);
+       SET @fantasia := CONCAT('Fantasia', i);
+       SET @idadepessoa := FLOOR(RAND() * 75) + 16; 
+       INSERT INTO halloween (nomepessoa, fantasia, idadepessoa) VALUES (@nomepessoa, @fantasia, @idadepessoa);
+       SET i = i + 1;
+   END WHILE;
+END$$

@@ -1,0 +1,26 @@
+CREATE DATABASE Teatro;
+Use Teatro;
+CREATE TABLE peca(
+   id INT AUTO_INCREMENT PRIMARY KEY,
+   Nomepeca VARCHAR(255),
+   Escritor VARCHAR(255),
+   Tempo INT,  -- Duração em minutos
+   data_estreia date
+);
+DELIMITER $$
+CREATE PROCEDURE InserePecasAleatorias()
+BEGIN
+   DECLARE i INT DEFAULT 0;
+   DECLARE random_tempo INT;
+   DECLARE random_ano YEAR;
+   WHILE i < 100 DO
+       SET @Nomepeca := CONCAT('Peça', i);
+       SET @Escritor := CONCAT('Escritor', i);
+       SET random_tempo := FLOOR(RAND() * 211) + 30;
+       SET random_ano := FLOOR(RAND() * 124) + 1900;
+       INSERT INTO peca (Nomepeca, Escritor, Tempo, ano_estreia)
+       VALUES (@Nomepeca, @Escritor, random_tempo, random_ano);
+       SET i = i + 1;
+   END WHILE;
+END$$
+DELIMITER ;

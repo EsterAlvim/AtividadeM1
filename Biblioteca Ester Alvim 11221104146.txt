@@ -1,0 +1,31 @@
+CREATE DATABASE Biblioteca;
+Use Biblioteca;
+create table Livros (
+
+ id INT AUTO_INCREMENT PRIMARY KEY,
+  titulo VARCHAR(255) NOT NULL,
+  autor VARCHAR(255) NOT NULL,
+  data_publicacao date,
+  estoque INT DEFAULT 0
+  descricao varchar (500) not null
+  );
+  
+  CREATE PROCEDURE 
+
+DELIMITER //
+CREATE PROCEDURE AdicionarLivro (
+   IN p_titulo VARCHAR(255),
+   IN p_autor VARCHAR(255),
+   IN p_data_publicacao YEAR,
+   IN p_estoque INT,
+   IN p_descricao varchar (500)
+)
+BEGIN
+   INSERT INTO livros (titulo, autor, ano_publicacao, estoque, descricao)
+   VALUES (p_titulo, p_autor, p_ano_publicacao, p_estoque, p_descricao);
+END //
+DELIMITER ;
+
+CALL AdicionarLivro('O extraordinário', ' R. J. Palacio', 2012, 89);
+CALL AdicionarLivro('Senhor dos Anéis', 'Tolkien', 1954, 90);
+SELECT * FROM AdicionarLivro
